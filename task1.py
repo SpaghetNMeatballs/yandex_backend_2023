@@ -39,24 +39,19 @@ def getminind(dc_arr: list[Datacenter], n: int) -> int:
 
 if __name__ == "__main__":
     n, m, q = [int(i) for i in input().split()]
-    min_ind = max_ind = 0
     dc_arr = [Datacenter(m) for i in range(n)]
     for i in range(q):
         operation = input().split()
         if operation[0] == 'GETMAX':
-            print(max_ind)
+            print(getmaxind(dc_arr, n))
             continue
         elif operation[0] == 'GETMIN':
-            print(min_ind)
+            print(getminind(dc_arr, n))
             continue
         dc_index = int(operation[1]) - 1
         if operation[0] == 'RESET':
             dc_arr[dc_index].reset()
-            if dc_arr[dc_index].get_val() > max_ind:
-                max_ind = dc_index
             continue
         elif operation[0] == 'DISABLE':
             server_index = int(operation[2]) - 1
             dc_arr[dc_index].disable(server_index)
-            if dc_arr[dc_index].get_val() < min_ind:
-                min_ind = dc_index
