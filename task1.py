@@ -3,17 +3,16 @@ class Datacenter:
         self.r = 0
         self.m = m
         self.a = m
-        self.state = [True for i in range(m)]
+        self.state = set()
 
     def reset(self):
         self.r += 1
-        self.state = [True for i in range(self.m)]
+        self.state = set()
         self.a = self.m
 
     def disable(self, to_disable: int):
-        state_of_to_disable = self.state[to_disable]
-        if state_of_to_disable:
-            self.state[to_disable] = False
+        if to_disable not in self.state:
+            self.state.add(to_disable)
             self.a -= 1
 
     def get_val(self) -> int:
